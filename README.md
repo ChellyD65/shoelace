@@ -1,6 +1,11 @@
 # shoelace #
 
-A python package and utilities for querying the <a href="http://www.ncbi.nlm.nih.gov/geo/">NCBI Gene Expression Omnibus (GEO)</a> database.
+A python package and utilities for querying the <a href="http://www.ncbi.nlm.nih.gov/geo/">NCBI Gene Expression Omnibus (GEO)</a> database.  
+
+## Installation ## 
+<ol>
+<li>Clone the repository
+</ol>
 
 
 ### Main tools ###
