@@ -4,7 +4,7 @@ A python package for RNA sequence data and expression level analysis and utiliti
 
 ### Installation
 <ol>
-<li>Clone the repository: 
+<li>Clone the repository:  
  | git clone https://github.com/ChellyD65/shoelace.git
 </ol>
 
