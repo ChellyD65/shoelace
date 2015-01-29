@@ -5,9 +5,8 @@ A python package for RNA sequence data and expression level analysis and utiliti
 ### Requirements
 -------------------
 * Tested with Python 2.7.1
+* <a href="http://www.numpy.org/">NumPy</a>, <a href="http://www.scipy.org/">SciPy</a>, <a href="http://matplotlib.org/">matplotlib</a>, <a href="http://scikit-learn.org/>scikit-learn</a>
 * HPC cluster job manager (LSF) utilities tested on Platform LSF HPC 7 Update 6
-* SciPy
-* 
 
 ### Installation
 -------------------
