@@ -12,10 +12,13 @@ A python package for RNA sequence data and expression level analysis and utiliti
 -------------------
 Clone the repository.
 
-    git clone https://github.com/ChellyD65/shoelace.git
+    git clone https://github.com/ChellyD65/shoelace.git <installdir>
 
+In your python script or code, add the path to the 'python/mmdgeneticstools' directory
 
-
+    sys.path.append('<installdir>/python/mmdgeneticstools')
+    from mmdgeneticstools.lib import *
+    
 #### Main tools
 -------------------
 * Analyze_RSEM_results.py -- Analysis of RSEM *.genes.results output files; sorts genes based on hg38 annotations from BioMart, does PCA, cross-correlation, etc.
