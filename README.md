@@ -21,9 +21,19 @@ In your python script or code, add the path to the 'python/mmdgeneticstools' dir
     
 #### Main tools
 -------------------
+Most of shoelace is in the form of a python package 'mmdgeneticstools' which can be imported into your own scripts.  Some example scripts are included in the shoelace/python/mmdgeneticstools/scripts/ directory:
+
 * Analyze_RSEM_results.py -- Analysis of RSEM *.genes.results output files; sorts genes based on hg38 annotations from BioMart, does PCA, cross-correlation, etc.
 * Shuffletown -- randomly distributes (paired end) FASTQ reads in multiple files into a number of new files
-* Split and Merge -- perl scripts that merge paired end read files from *_1.fastq and *_2.fastq into a single file, and split them back apart if needed
+
+The shoelace/python/mmdgeneticstools/lib/ directory contains the modules that can be imported.  Some of these can be run as standalone scripts from the command line:
+
 * Plotter.py -- Generates figures summarizing expression data, correlation, and cluster analysis.
+
+##### Utility tools
+-------------------
+Perl and BASH shell scripts that may be helpful, especially in the HPC environment.
+
 * Job management tools -- submits multiple bowtie and RSEM jobs to and LSF cluster in an organized way
+* Split and Merge -- perl scripts that merge paired end read files from *_1.fastq and *_2.fastq into a single file, and split them back apart if needed
 
