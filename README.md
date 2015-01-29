@@ -8,6 +8,11 @@ A python package for RNA sequence data and expression level analysis and utiliti
  | git clone https://github.com/ChellyD65/shoelace.git
 </ol>
 
+Installation
+-----------
+
+    gem install github-markup
+
 
 #### Main tools
 * Shuffletown -- randomly distributes (paired end) FASTQ reads in multiple files into a number of new files
