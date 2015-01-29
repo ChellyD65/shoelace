@@ -35,6 +35,7 @@ The shoelace/python/mmdgeneticstools/lib/ directory contains the modules that ca
 Perl and BASH shell scripts that may be helpful, especially in the HPC environment.
 
 * Job management tools -- submits multiple bowtie and RSEM jobs to and LSF cluster in an organized way
-** Align_All_Cells_In_Dir.sh
+    *  Align_All_Cells_In_Dir.sh
+    *  RSEM-calc-expression_All_Cells_In_Dir.sh
 * Split and Merge -- perl scripts that merge paired end read files from *_1.fastq and *_2.fastq into a single file, and split them back apart if needed
 
