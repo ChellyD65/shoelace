@@ -11,7 +11,7 @@ from Bio import Geo
 import xml.dom.minidom
 import subprocess
 import columnize
-from mmdgeneticstools.references.EntrezDBs import EntrezDBs
+from shoelace.references.EntrezDBs import EntrezDBs
 
 
 class FileLoader:

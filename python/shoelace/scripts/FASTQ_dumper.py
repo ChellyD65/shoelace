@@ -17,11 +17,11 @@ import glob
 
 # mmd Library of functions
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))
-from mmdgeneticstools.lib import mmdConfig
-from mmdgeneticstools.lib import FileLoader #as FileLoader
-from mmdgeneticstools.lib import Shuffler #as Shuffler
-from mmdgeneticstools.lib import GetGzippedFromServer as GZFS
-from mmdgeneticstools.lib import columnize
+from shoelace.lib import mmdConfig
+from shoelace.lib import FileLoader #as FileLoader
+from shoelace.lib import Shuffler #as Shuffler
+from shoelace.lib import GetGzippedFromServer as GZFS
+from shoelace.lib import columnize
 
 print "Running Python version {0}.{1}".format(sys.version_info[0],sys.version_info[1])
 console_height, console_width = map(int, os.popen('stty size', 'r').read().split())

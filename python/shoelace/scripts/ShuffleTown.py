@@ -16,9 +16,9 @@ import glob
 
 # mmd Library of functions
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))
-from mmdgeneticstools.lib import mmdConfig # as mmdConfig
-from mmdgeneticstools.lib import FileLoader #as FileLoader
-from mmdgeneticstools.lib import Shuffler #as Shuffler
+from shoelace.lib import mmdConfig # as mmdConfig
+from shoelace.lib import FileLoader #as FileLoader
+from shoelace.lib import Shuffler #as Shuffler
 
 
 """
