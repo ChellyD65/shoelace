@@ -1,6 +1,7 @@
-# README #
+# shoelace #
 
-Some simple utilities for manipulating FASTQ files
+A python package and utilities for querying the <a href="http://www.ncbi.nlm.nih.gov/geo/">NCBI Gene Expression Omnibus (GEO)</a> database.
+
 
 ### Main tools ###
 * Shuffletown -- randomly distributes (paired end) FASTQ reads in multiple files into a number of new files
