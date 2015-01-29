@@ -4,7 +4,8 @@ A python package for RNA sequence data and expression level analysis and utiliti
 
 ### Requirements
 -------------------
-Tested with Python 2.7.1
+* Tested with Python 2.7.1
+* HPC cluster job manager (LSF) utilities tested on Platform LSF HPC 7 Update 6
 
 ### Installation
 -------------------
