@@ -1,0 +1,25 @@
+# Directory to save experiment series information matrix, and other metadata
+SeriesMetadataDir         = "."
+
+# Directory to save FASTQ files retrieved
+fastq_dir                 = "fastq"
+
+# Directory to save FASTQ files created by shuffling
+virtual_fastq_dir         = "fastq_virtual"
+
+# Path to bowtie exeecutable
+bowtie                    = "bowtie"
+
+# Path to fastq_dump executable from SRAtools
+fastq_dump                = "fastq-dump"
+
+# Path to rsem executable
+rsem_calculate_expression = "rsem-calculate-expression"
+
+# Path to RSEM reference (created with rsem utilities)
+RefGenomeDir              = "rsem"
+
+# Path to samtools executable
+samtools                  = "samtools"
+
+
