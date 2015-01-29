@@ -9,6 +9,7 @@ echo
 echo "Input directory: $inputDir"
 echo 
 
+#Change this to your reference sequence file (e.g. hg19)
 reference_file=/path/to/reference_file
 
 find $inputDir -maxdepth 1 -name '*.sam' | while read filename; do
