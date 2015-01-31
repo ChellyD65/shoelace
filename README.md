@@ -42,3 +42,8 @@ Perl and BASH shell scripts that may be helpful, especially in the HPC environme
     *  RSEM-calc-expression_All_Cells_In_Dir.sh
 * Split and Merge -- perl scripts that merge paired end read files from *_1.fastq and *_2.fastq into a single file, and split them back apart if needed
 
+
+### Typical Workflow
+-------------------
+Find the GEO accession number in the study you are interested in.  For example, GSE36552.
+
