@@ -48,7 +48,9 @@ Perl and BASH shell scripts that may be helpful, especially in the HPC environme
 Find the GEO accession number in provided in the paper for the study you are interested in.  
 Search for it at http://www.ncbi.nlm.nih.gov/gds.
 
-For example, GSE36552.
+For example, we'll work with some data from this paper on the transcriptome of human pre-implantation embryos: Yan L, Yang M, Guo H, Yang L et al. Single-cell RNA-Seq profiling of human preimplantation embryos and embryonic stem cells. Nat Struct Mol Biol 2013 Sep;20(9):1131-9. PMID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/23934149">23934149</a>
+
+The GEO Accession number is <b>GSE36552</b>
 
 <img src="docs/img/GEO_screenshot_1.jpg">
 
