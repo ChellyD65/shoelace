@@ -50,3 +50,5 @@ Search for it at http://www.ncbi.nlm.nih.gov/gds.
 
 For example, GSE36552.
 
+<img src="docs/img/GEO_screenshot_1.jpg">
+
