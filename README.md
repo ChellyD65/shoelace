@@ -45,5 +45,8 @@ Perl and BASH shell scripts that may be helpful, especially in the HPC environme
 
 ### Typical Workflow
 -------------------
-Find the GEO accession number in the study you are interested in.  For example, GSE36552.
+Find the GEO accession number in provided in the paper for the study you are interested in.  
+Search for it at http://www.ncbi.nlm.nih.gov/gds.
+
+For example, GSE36552.
 
