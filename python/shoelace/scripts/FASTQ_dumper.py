@@ -33,13 +33,13 @@ p = mmdConfig.Paths()
 SeriesMetadataDir = p.SeriesMetadataDir 
 
 """
-Load the series matrix (avaiable at ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE57nnn/GSE57872/matrix/GSE57872_series_matrix.txt.gz)
+Load the series matrix 
 This gives the GEO accession numbers for all samples, and their descriptions
 """
-SM_file = os.path.join(SeriesMetadataDir,'GSE57872_series_matrix.txt')
+SM_file = os.path.join(SeriesMetadataDir,os.path.split(p.GEO_SeriesMatrixURL)[1])
 if not(os.path.exists(SM_file)):
     G =  GZFS.GetGZippedFromServer()
-    G.getunzipped('ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE57nnn/GSE57872/matrix/GSE57872_series_matrix.txt.gz', SM_file)
+    G.getunzipped(p.GEO_SeriesMatrixURL, SM_file)
 else:
     print os.path.split(SM_file)[1] + " found."
 

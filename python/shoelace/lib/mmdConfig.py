@@ -6,6 +6,9 @@ import os
 import sys
 import re
 
+
+
+
 class Paths:
     def __init__(self, configFilename=None):
         if sys.platform == 'win32':
@@ -17,7 +20,7 @@ class Paths:
         if configFilename:
             self.configfile = configFilename
         else:
-            self.configfile = os.path.join(basedir,'default_config.txt')
+            self.configfile = os.path.abspath(str(raw_input('Please enter the configuration filename: ')))
         print("Loading configuration file: " + self.configfile)
         self.loadConfigFile(self.configfile)
         print "mmdConfig.Paths: Set up file paths for data and genomics tools. Data directory = " + self.SeriesMetadataDir
