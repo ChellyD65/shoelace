@@ -88,13 +88,17 @@ class FileLoader:
         for kc in choice.keys():
             records=SM[kc]
             for pattern in choice[kc]:
-                print pattern
                 #regex=re.compile(pattern)
                 #inds = [i for i,x in enumerate(records) if regex.search(x)]
                 inds = [i for i,x in enumerate(records) if (x==pattern)]
                 hits.append(inds)
                 #finalinds.extend(inds)
-        finalinds = list(set.intersection(*map(set, hits)))
+        if len(hits) > 0:
+            finalinds = list(set.intersection(*map(set, hits)))
+        else:
+            records = SM[SM.keys()[0]]
+            finalinds = [i for i,x in enumerate(records)]
+
 
 
         for ke in exclude.keys():

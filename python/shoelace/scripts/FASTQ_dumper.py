@@ -15,6 +15,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import glob
 import pickle
+import argparse
 
 # mmd Library of functions
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))
@@ -28,9 +29,24 @@ print "Running Python version {0}.{1}".format(sys.version_info[0],sys.version_in
 console_height, console_width = map(int, os.popen('stty size', 'r').read().split())
 
 """
+Parse command line options
+"""
+
+parser = argparse.ArgumentParser()
+parser.add_argument("--configfile", help="Path to configuration file")
+args = parser.parse_args()
+
+    
+
+
+
+"""
 Set up data directories
 """
-p = mmdConfig.Paths()
+if args.configfile:
+    p = mmdConfig.Paths(args.configfile)
+else:
+    p = mmdConfig.Paths()
 SeriesMetadataDir = p.SeriesMetadataDir 
 
 """
