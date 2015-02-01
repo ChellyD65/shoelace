@@ -1,25 +1,35 @@
+# ------------------------------------------------------------------------------------------
+# Project Setup
+# ------------------------------------------------------------------------------------------
+
+# Address of the expression omnibus (GEO) 'series matrix' file (it will be downloaded to the SeriesMetadataDir)
+GEO_SeriesMatrixURL       = 'Series_matrix.txt.gz'
+
 # Directory to save experiment series information matrix, and other metadata
 SeriesMetadataDir         = "."
 
 # Directory to save FASTQ files retrieved
-fastq_dir                 = "fastq"
+fastq_dir                 = "./fastq"
 
 # Directory to save FASTQ files created by shuffling
-virtual_fastq_dir         = "fastq_virtual"
+virtual_fastq_dir         = "./fastq_virtual"
 
-# Path to bowtie exeecutable
-bowtie                    = "bowtie"
+# ------------------------------------------------------------------------------------------
+# Tools 
+# ------------------------------------------------------------------------------------------
+
+# Path to bowtie executable
+bowtie                    = 'bowtie'
 
 # Path to fastq_dump executable from SRAtools
-fastq_dump                = "fastq-dump"
+fastq_dump                = 'fastq-dump'
 
 # Path to rsem executable
-rsem_calculate_expression = "rsem-calculate-expression"
+rsem_calculate_expression = 'rsem-calculate-expression'
 
 # Path to RSEM reference (created with rsem utilities)
-RefGenomeDir              = "rsem"
+RefGenomeDir              = 'references/ucsc/hg19/rsem'
 
 # Path to samtools executable
-samtools                  = "samtools"
-
+samtools                  = 'samtools'
 
