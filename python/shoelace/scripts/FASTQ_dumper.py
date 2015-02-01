@@ -14,6 +14,7 @@ import subprocess
 import numpy as np
 import matplotlib.pyplot as plt
 import glob
+import pickle
 
 # mmd Library of functions
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))
@@ -68,10 +69,11 @@ for key in exclude.keys():
 Determine the GEO accession numbers from the Series Matrix
 """
 GEOAccNums, icoi = FL.choose_cell_records(sm,choice,exclude)
-fff = open(os.path.join(SeriesMetadataDir, "GSE57872_series_matrix.p"), "wb")
+f1 = os.path.splitext(SM_file)[0] + ".p"
+fff = open(os.path.join(SeriesMetadataDir, f1), "wb")
 pickle.dump([sm, GEOAccNums, icoi], fff)
 fff.close()
-print("Saved pickled object file: " + os.path.join(SeriesMetadataDir, "GSE57872_series_matrix.p"))
+print("Saved pickled object file: " + os.path.join(SeriesMetadataDir, f1))
 
 """
 Retrieve the FASTQ files from the server

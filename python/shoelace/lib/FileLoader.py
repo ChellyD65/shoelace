@@ -73,6 +73,7 @@ class FileLoader:
     def choose_cell_records(self, SM, choice=None, exclude=None):
         # SM = SeriesData returned by parse_series_matrix
 
+        # mmdhere: need to update
         #If the list already exists, just load it
         SRR_list_file = os.path.join(self.p.SeriesMetadataDir, 'GSE57872_AccessionNumbersForCellsOfInterest.txt')
         if os.path.exists(SRR_list_file):
@@ -87,7 +88,8 @@ class FileLoader:
         for kc in choice.keys():
             records=SM[kc]
             for pattern in choice[kc]:
-                regex=re.compile(pattern)
+                print pattern
+                #regex=re.compile(pattern)
                 #inds = [i for i,x in enumerate(records) if regex.search(x)]
                 inds = [i for i,x in enumerate(records) if (x==pattern)]
                 hits.append(inds)
@@ -98,7 +100,7 @@ class FileLoader:
         for ke in exclude.keys():
             records=SM[ke]
             for pattern in exclude[ke]:
-                regex=re.compile(pattern)
+                #regex=re.compile(pattern)
                 #inds = [i for i,x in enumerate(records) if regex.search(x)]
                 inds = [i for i,x in enumerate(records) if (x==pattern)]
                 finalinds = [aa for aa in finalinds if aa not in inds]
