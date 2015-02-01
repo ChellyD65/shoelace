@@ -80,3 +80,14 @@ The program will prompt you to enter the filename of the configuration file:
     Please enter the configuration filename:   Project.config 
 
 It will then download the Series matrix *.tar.gz file, unzip and read it, and parse the data fields, presenting you with a menu of options with which you can choose which data records will be downloaded.
+
+###### Choosing GEO data records
+-------------------
+* The first menu contains all the field <b>names</b> present in the Series Matrix file.  Enter the numbers corresponding to field names that you want to select from.  For each number entered here, a submenu will be created (and presented sequentially) with the unique data values found for the corresponding field name.
+
+* The files downloaded will be the INTERSECTION of matching records.  Thus, a record must contain ALL values selected from the various fields in order to be included.
+
+* You may specify values to EXCLUDE by entering a corresponding negative number.  Records matching the corresponding value will be ignored.
+
+* If you do not enter any positive numbers in a submenu, all values for that submenu's field will be downloaded (unless they are excluded by entering a negative value).
+
