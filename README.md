@@ -50,9 +50,14 @@ Search for it at http://www.ncbi.nlm.nih.gov/gds.
 
 For example, we'll work with some data from this paper on the transcriptome of human pre-implantation embryos: Yan L, Yang M, Guo H, Yang L et al. Single-cell RNA-Seq profiling of human preimplantation embryos and embryonic stem cells. Nat Struct Mol Biol 2013 Sep;20(9):1131-9. PMID: <a href="http://www.ncbi.nlm.nih.gov/pubmed/23934149">23934149</a>
 
-The GEO Accession number is <b>GSE36552</b>
+The GEO Accession number is <b>GSE36552</b>.  A search brings up this <a href="http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE36552">page<a/>: 
 
 <img src="docs/img/GEO_screenshot_1.jpg">
 
-Find the 
+Find the link to the "Series Matrix File(s)" and retrieve that file.
+
+<img src="docs/img/GEO_screenshot_2.jpg">
+
+
+
 
