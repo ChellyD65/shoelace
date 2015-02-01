@@ -71,4 +71,17 @@ Edit the configuration file with the appropriate paths.  SeriesMetaDataDir is th
      fastq_dir                 = '<ProjectDir>/fastq'
      virtual_fastq_dir         = '<ProjectDir>/fastq_virtual'
 
-Next, you need to retrieve the FASTQ files for your project.  For this you can use the <a href="docs/Getting_data_with_FASTQ.md">FASTQ_dumper.py</a> utility.
+
+#### Retrieving Data
+---------------------
+Next, you need to <a href="docs/Getting_data_with_FASTQ.md">retrieve the FASTQ files<a/> for your project.  For this you can use the FASTQ_dumper.py utility.
+
+
+#### Shuffling data to create controls
+---------------------
+
+#### Alignment and expression level estimation
+---------------------
+
+#### Clustering and statistics
+---------------------
