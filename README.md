@@ -58,6 +58,5 @@ Find the link to the "Series Matrix File(s)" and retrieve that file.
 
 <img src="docs/img/GEO_screenshot_2.jpg">
 
-
-
+     wget ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE22nnn/GSE22182/matrix/GSE22182_series_matrix.txt.gz
 
