@@ -17,19 +17,19 @@ Clone the repository.
 
     git clone https://github.com/ChellyD65/shoelace.git <installdir>
 
-In your python script or code, add the path to the 'python/mmdgeneticstools' directory
+In your python script or code, add the path to the 'python/shoelace' directory
 
-    sys.path.append('<installdir>/python/mmdgeneticstools')
-    from mmdgeneticstools.lib import *
+    sys.path.append('<installdir>/python/shoelace')
+    from shoelace.lib import *
     
 #### Main tools
 -------------------
-Most of shoelace is in the form of a python package 'mmdgeneticstools' which can be imported into your own scripts.  Some example scripts are included in the shoelace/python/mmdgeneticstools/scripts/ directory:
+Most of shoelace is in the form of a python package 'shoelace' which can be imported into your own scripts.  Some example scripts are included in the shoelace/python/shoelace/scripts/ directory:
 
 * Analyze_RSEM_results.py -- Analysis of RSEM *.genes.results output files; sorts genes based on hg38 annotations from BioMart, does PCA, cross-correlation, etc.
 * Shuffletown -- randomly distributes (paired end) FASTQ reads in multiple files into a number of new files
 
-The shoelace/python/mmdgeneticstools/lib/ directory contains the modules that can be imported.  Some of these can be run as standalone scripts from the command line:
+The shoelace/python/shoelace/lib/ directory contains the modules that can be imported.  Some of these can be run as standalone scripts from the command line:
 
 * Plotter.py -- Generates figures summarizing expression data, correlation, and cluster analysis.
 
