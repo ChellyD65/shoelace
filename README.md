@@ -54,17 +54,29 @@ The GEO Accession number is <b>GSE36552</b>.  A search brings up this <a href="h
 
 <img src="docs/img/GEO_screenshot_1.jpg">
 
-Find the link to the "Series Matrix File(s)".
+Find the link to the "Series Matrix File(s)". Follow it and copy the ftp link to the file:
 
 <img src="docs/img/GEO_screenshot_2.jpg">
 
-Retrieve that file.
-
-     wget ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE22nnn/GSE22182/matrix/GSE22182_series_matrix.txt.gz
+     ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE22nnn/GSE22182/matrix/GSE22182_series_matrix.txt.gz
 
 Create a configuration file for this project.  A template is located in the python/shoelace/ directory.
 
-     cp <shoelace_install_dir>/shoelace/python/shoelace/default_config.txt  <ProjectDir>/Yan_2013.config
+     cp <shoelace_install_dir>/shoelace/python/shoelace/default_config.txt  <ProjectDir>/Project.config
 
-Edit the configuration file with the appropriate paths.  SeriesMetaDataDir is the location of the config file (<ProjectDir> in this walkthrough). fastq_dir, and virtual_fastq_dir can be any directories you like (they will be created if they do not exist).
+Edit the configuration file with the appropriate paths.  SeriesMetaDataDir is the location that the config file will be downloaded to (<ProjectDir> in this walkthrough). fastq_dir, and virtual_fastq_dir can be any directories you like (they will be created if they do not exist). Often they are set up like this:
 
+     GEO_SeriesMatrixURL       = 'ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE22nnn/GSE22182/matrix/GSE22182_series_matrix.txt.gz'
+     SeriesMetadataDir         = '<ProjectDir>'
+     fastq_dir                 = '<ProjectDir>/fastq'
+     virtual_fastq_dir         = '<ProjectDir>/fastq_virtual'
+
+Now execute the FASTQ_dumper.py script located in <installdir>/python/shoelace/scripts/
+
+    <installdir>/python/shoelace/scripts/FASTQ_dumper.py
+
+The program will prompt you to enter the filename of the configuration file:
+
+    Please enter the configuration filename:   Project.config 
+
+It will then download the Series matrix *.tar.gz file, unzip and read it, and parse the data fields, presenting you with a menu of options with which you can choose which data records will be downloaded.
