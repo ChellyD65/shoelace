@@ -13,6 +13,7 @@ import subprocess
 import numpy as np
 import matplotlib.pyplot as plt
 import glob
+import argparse
 
 # mmd Library of functions
 sys.path.append(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))

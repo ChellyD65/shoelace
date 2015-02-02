@@ -238,8 +238,10 @@ class FileLoader:
                     if nfv < 0:
                         exclude[thiskey].append(fieldvalues[abs(nfv)-1])
 
-            choice = {k: v for k, v in choice.items() if len(v)>0} # get rid of keys with empty lists for values
-            exclude = {k: v for k, v in exclude.items() if len(v)>0}
+            # get rid of keys with empty lists for values
+            choice = dict((k, v) for k, v in choice.iteritems() if len(v)>0)
+            exclude = dict((k, v) for k, v in exclude.iteritems() if len(v)>0)
+
 
 
             
