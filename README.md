@@ -79,6 +79,8 @@ Next, you need to <a href="docs/Getting_data_with_FASTQ.md">retrieve the FASTQ f
 
 #### Shuffling data to create controls
 ---------------------
+The ShuffleTown.py script will count the lines in each of your FASTQ files and then re-distribute the reads into new files, maintaining the number of reads per file.  Thus the set of new files will have the same length as the original files, but data will be shuffled so that within-cell information is lost, and the data is more like randomly partitioning tissue sequence data.
+
 
 #### Alignment and expression level estimation
 ---------------------
