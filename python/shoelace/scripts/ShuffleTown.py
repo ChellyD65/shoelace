@@ -24,7 +24,21 @@ from shoelace.lib import Shuffler #as Shuffler
 """
 Main Function
 """
-p = mmdConfig.Paths()
+"""
+Parse command line options
+"""
+parser = argparse.ArgumentParser()
+parser.add_argument("--configfile", help="Path to configuration file")
+args = parser.parse_args()
+
+"""
+Set up data directories
+"""
+if args.configfile:
+    p = mmdConfig.Paths(args.configfile)
+else:
+    p = mmdConfig.Paths()
+
 print "Running Python version {0}.{1}".format(sys.version_info[0],sys.version_info[1])
 
 

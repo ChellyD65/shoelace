@@ -31,14 +31,9 @@ console_height, console_width = map(int, os.popen('stty size', 'r').read().split
 """
 Parse command line options
 """
-
 parser = argparse.ArgumentParser()
 parser.add_argument("--configfile", help="Path to configuration file")
 args = parser.parse_args()
-
-    
-
-
 
 """
 Set up data directories
