@@ -160,11 +160,16 @@ class FileLoader:
         d = self.p.fastq_dir 
         if not os.path.isdir(d):
             os.makedirs(d)
+        FASTQ_file_single = os.path.join(d,a+".fastq")
         FASTQ_file_1 = os.path.join(d,a+"_1.fastq")
         FASTQ_file_2 = os.path.join(d,a+"_2.fastq")
         if (os.path.exists(FASTQ_file_1) & os.path.exists(FASTQ_file_2)) or (os.path.exists(FASTQ_file_1+".gz") & os.path.exists(FASTQ_file_2+".gz")):
-            print "fastq files found: " + FASTQ_file_1 + " , " + os.path.split(FASTQ_file_2)[1]
+            print "Paired-end read fastq files found: " + FASTQ_file_1 + " , " + os.path.split(FASTQ_file_2)[1]
             return 0
+        if (os.path.exists(FASTQ_file_single) or os.path.exists(FASTQ_file_single+".gz")):
+            print "Single-end read fastq file found: " + FASTQ_file_single
+            return 0
+         
         else:
             print "Retrieving FASTQ file for accession number: " + a + "..."
             if numberOfReads == 0:
@@ -177,6 +182,12 @@ class FileLoader:
                     subprocess.check_call([self.p.fastq_dump, "-F", "--split-3", "-X", numberOfReads, "-O", d, a])
                 except subprocess.CalledProcessError:
                     print "fastq-dump returned an error: " + str(subprocess.CalledProcessError.returncode)
+
+        if (os.path.exists(FASTQ_file_1) & os.path.exists(FASTQ_file_2)) or (os.path.exists(FASTQ_file_1+".gz") & os.path.exists(FASTQ_file_2+".gz")):
+            print "Paired-end read fastq files found: " + FASTQ_file_1 + " , " + os.path.split(FASTQ_file_2)[1]
+            return 0
+        if (os.path.exists(FASTQ_file_single) or os.path.exists(FASTQ_file_single+".gz")):
+            print "Single-end read fastq file found: " + FASTQ_file_single
             return 0
 
 

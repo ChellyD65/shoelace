@@ -24,40 +24,46 @@ class Shuffler:
         self.p = p  
 
     def setup(self):
+        self.inputFilenames = glob.glob(os.path.join(self.p.fastq_dir,'*_1.fastq'))
+        if (len(self.inputFilenames) < 1):
+            self.inputFilenames = glob.glob(os.path.join(self.p.fastq_dir,'*.fastq'))
+            self.singleEnd = True
+        else:
+            self.singleEnd = False
         self.ReadFileLens()
         
     def run(self):
-        inputFilenames = glob.glob(os.path.join(self.p.fastq_dir,'*_1.fastq'))
-        print "%d line counts found." % len(self.linecounts)
-        print "%d input files found." % len(inputFilenames)
-
+        print "%d line counts found in file." % len(self.linecounts)
+        print "%d input files found." % len(self.inputFilenames)
         self.OpenOutputFiles(len(self.linecounts))
-        for f in inputFilenames:
+        for f in self.inputFilenames:
             f1 = f
-            f2 = re.sub('_1\.fastq','_2.fastq', f1)
             if1 = open(f1,'r')
-            if2 = open(f2,'r')
+            if not self.singleEnd:
+                f2 = re.sub('_1\.fastq','_2.fastq', f1)
+                if2 = open(f2,'r')
             while 1:
                 read1 = []
                 for i in range(0,4):
                     line1 = if1.readline()
                     read1.append(line1)
-                read2 = []
-                for i in range(0,4):
-                    line2 = if2.readline()
-                    read2.append(line2)
+                if not self.singleEnd:
+                    read2 = []
+                    for i in range(0,4):
+                        line2 = if2.readline()
+                        read2.append(line2)
+                else:
+                    line2 = True
                 if not line1 or not line2:
                     break
                 else:
                     fn = self.ChooseOutputFile()
                     for i in range(0,4):
                         self.outfileHandles_1[fn].write(read1[i])
-                        self.outfileHandles_2[fn].write(read2[i])
+                        if not self.singleEnd:
+                            self.outfileHandles_2[fn].write(read2[i])
 
             print "Done reading file %s."  % f
-
-
-        
         self.CloseOutputFiles()
         
     def file_len(self, fname):
@@ -74,41 +80,46 @@ class Shuffler:
         if fname == 0:
             fname = os.path.join(self.p.fastq_dir, "FASTQ_linecounts.txt")
         if not os.path.exists(fname):
+            print "Counting lines in FASTQ files, using system call to wc -l"
             try:
                 os.system("wc -l " + os.path.join(self.p.fastq_dir,"*.fastq") + " > " + fname)
             except OSError:
                 print "Counting lines in fastq files with wc failed."
                 return -1
         print "Reading line counts for FASTQ files from " + fname
-        self.linecounts = np.genfromtxt(fname, delimiter=" ")[:-1:2,0]
+        if self.singleEnd:
+            self.linecounts = np.genfromtxt(fname, delimiter=" ")[:-1:1,0]
+        else:
+            self.linecounts = np.genfromtxt(fname, delimiter=" ")[:-1:2,0]
         self.fileChooserIndex = np.cumsum(self.linecounts/(max(1,np.std(self.linecounts))))
         
     def ChooseOutputFile(self):
         roll = np.random.rand()*np.max(self.fileChooserIndex)
         return np.min(np.nonzero(self.fileChooserIndex>roll))
         
-    def OpenOutputFiles(self, n=4):
+    def OpenOutputFiles(self, n=4, pairedEndFiles=True):
         self.outfileHandles_1 = []
-        self.outfileHandles_2 = []
+        if pairedEndFiles:
+            self.outfileHandles_2 = []
         for i in range(1,n+1):
             self.outfileHandles_1.append(open(os.path.join(self.p.virtual_fastq_dir,"mmdVirtualCell_%03d_1.fastq" % i),'w+'))
-            self.outfileHandles_2.append(open(os.path.join(self.p.virtual_fastq_dir,"mmdVirtualCell_%03d_2.fastq" % i),'w+'))
+            if pairedEndFiles:
+                self.outfileHandles_2.append(open(os.path.join(self.p.virtual_fastq_dir,"mmdVirtualCell_%03d_2.fastq" % i),'w+'))
         
 
-    def CloseOutputFiles(self):
+    def CloseOutputFiles(self, pairedEndFiles=True):
         for i in self.outfileHandles_1:
             i.close()
-        for i in self.outfileHandles_2:
-            i.close()
+        if pairedEndFiles:
+            for i in self.outfileHandles_2:
+                i.close()
     
-
-
-    def CreateVirtualCellsFromAllReadsMerged(self, n=430):
+    def CreateVirtualCellsFromAllReadsMerged(self, n=430, pairedEndFiles=True):
         print "Writing virtual cells."
         INFILE1 = os.path.join(self.virtual_fastq_dir, "AllReads_Merged_1.fastq")
-        INFILE2 = os.path.join(self.virtual_fastq_dir, "AllReads_Merged_2.fastq")
+        if pairedEndFiles:
+            INFILE2 = os.path.join(self.virtual_fastq_dir, "AllReads_Merged_2.fastq")
         print "Total number of reads: " + str(TotalReads)
-
         return 0
 
 
