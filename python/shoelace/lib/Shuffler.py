@@ -36,6 +36,7 @@ class Shuffler:
         print "%d line counts found in file." % len(self.linecounts)
         print "%d input files found." % len(self.inputFilenames)
         self.OpenOutputFiles(len(self.linecounts))
+        c = 0
         for f in self.inputFilenames:
             f1 = f
             if1 = open(f1,'r')
@@ -62,8 +63,8 @@ class Shuffler:
                         self.outfileHandles_1[fn].write(read1[i])
                         if not self.singleEnd:
                             self.outfileHandles_2[fn].write(read2[i])
-
-            print "Done reading file %s."  % f
+            c = c + 1
+            print "Done reading file %s. [%d/%d]"  % f, c, len(self.inputFilenames)
         self.CloseOutputFiles()
         
     def file_len(self, fname):
@@ -99,13 +100,14 @@ class Shuffler:
         
     def OpenOutputFiles(self, n=4, pairedEndFiles=True):
         self.outfileHandles_1 = []
-        if pairedEndFiles:
+        if not self.singleEnd:
             self.outfileHandles_2 = []
         for i in range(1,n+1):
-            self.outfileHandles_1.append(open(os.path.join(self.p.virtual_fastq_dir,"mmdVirtualCell_%03d_1.fastq" % i),'w+'))
-            if pairedEndFiles:
+            if not self.singleEnd:
+                self.outfileHandles_1.append(open(os.path.join(self.p.virtual_fastq_dir,"mmdVirtualCell_%03d_1.fastq" % i),'w+'))
                 self.outfileHandles_2.append(open(os.path.join(self.p.virtual_fastq_dir,"mmdVirtualCell_%03d_2.fastq" % i),'w+'))
-        
+            else:
+                self.outfileHandles_1.append(open(os.path.join(self.p.virtual_fastq_dir,"mmdVirtualCell_%03d.fastq" % i),'w+'))
 
     def CloseOutputFiles(self, pairedEndFiles=True):
         for i in self.outfileHandles_1:

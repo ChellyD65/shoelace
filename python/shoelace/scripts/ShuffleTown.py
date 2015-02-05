@@ -48,5 +48,7 @@ print "Running Python version {0}.{1}".format(sys.version_info[0],sys.version_in
 
 SH = Shuffler.Shuffler(p)
 SH.setup()
-SH.run()
+#SH.run()
+
+print "Shuffling completed! New files are in: " + p.virtual_fastq_dir
 
