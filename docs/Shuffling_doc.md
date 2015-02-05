@@ -3,7 +3,7 @@
 
 Once your files are downloaded and the configuration file specifies their locations, simply run
 
-  <shoelace_install_dir>/python/shoelace/scripts/ShuffleTown.py --configfile <Project.config>
+  shoelace_install_dir/python/shoelace/scripts/ShuffleTown.py --configfile <Project.config>
   
 The reads in your FASTQ files will be randomly distributed among a set of new files.  The number of new files will be the same as the number of files in the original dataset (i.e. the number of files in the fastq_dir).  The distribution of number of reads per file will match the distribution of number of reads per file in the original.
 
