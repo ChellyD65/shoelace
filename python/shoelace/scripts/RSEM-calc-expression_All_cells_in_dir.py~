@@ -35,16 +35,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--configfile", help="Path to configuration file")
 parser.add_argument("-d", "--directory", help="Directory containing *.fastq files to align")
 parser.add_argument("-r", "--reference", help="Path to reference to align to")
+args = parser.parse_args()
 
-args, unknown = parser.parse_known_args()
-bowtieargstring = ''
-for i in unknown:
-    bowtieargstring = bowtieargstring + ' ' + str(i)
-bowtieargstring = bowtieargstring + ' ' 
-
-"""
-Setup directories, files
-"""
 inputDir = None; referenceFile = None
 if args.directory:
     inputDir = args.directory
@@ -62,9 +54,10 @@ if not referenceFile:
     print "No reference file directory argument specified.  Using reference file specified in configuration file."
     referenceFile = p.RefGenomeDir
 
-"""
-Find files, generate commands and submit jobs
-"""
+
+convert_command = os.path.join(p.rsem_dir,'convert-sam-for-rsem')
+rsem_command = os.path.join(p.rsem_dir,'rsem-calculate-expression')
+
 for idir in inputDir:
     inputFilenames_1 = glob.glob(os.path.join(idir,'*_1.fastq'))
     if (len(inputFilenames_1) < 1):
@@ -82,19 +75,31 @@ for idir in inputDir:
             outputFilenames.append(re.sub('\.fastq','.sam', f1))
         else:
             outputFilenames.append(re.sub('_1\.fastq','.sam', f1))
-            inputFilenames_2.append(re.sub('_1\.fastq','_2.fastq', f1))
+
 
     for i in range(len(inputFilenames_1)):
         print inputFilenames_1[i]
         print outputFilenames[i]
         if singleEnd:
-            command_string = "bsub -q short -n 4 -W 12:00 -R \"rusage[mem=12000]\" -e ~/.lsbatch_errors -o lsf_output.txt \"{0} {1} {2} -n 0 -e 99999999 -l 25 -I 1 -X 2000 -a -m 15 {3} -S {4};\"".format(p.bowtie, p.RefGenomeDir, bowtieargstring, inputFilenames_1[i], outputFilenames[i])
+            # command_string = "bsub -q short -n 4 -W 12:00 -R \"rusage[mem=12000]\" -e ~/.lsbatch_errors -o lsf_output.txt \"{0} {1} -n 0 -e 99999999 -l 25 -I 1 -X 2000 -a -m 15 {2} -S {3};\"".format(p.bowtie, p.RefGenomeDir, inputFilenames_1[i], outputFilenames[i])
+
+            
         else:
-            command_string = "bsub -q short -n 4 -W 12:00 -R \"rusage[mem=12000]\" -e ~/.lsbatch_errors -o lsf_output.txt \"{0} {1} {2} -n 0 -e 99999999 -l 25 -I 1 -X 2000 -a -m 15 -1 {3} -2 {4}, -S {5};\"".format(p.bowtie, p.RefGenomeDir, bowtieargstring, inputFilenames_1[i], inputFilenames_2[i], outputFilenames[i])
+            
+            # command_string = "bsub -q short -n 4 -W 12:00 -R \"rusage[mem=12000]\" -e ~/.lsbatch_errors -o lsf_output.txt \"{0} {1} -n 0 -e 99999999 -l 25 -I 1 -X 2000 -a -m 15 -1 {2} -2 {3}, -S {4};\"".format(p.bowtie, p.RefGenomeDir, inputFilenames_1[i], inputFilenames_2[i], outputFilenames[i])
+
+            command_string = "bsub -q short -n 6 -W 12:00 -e ~/.lsbatch_errors_rsem -o lsf_output.txt \"{0} {1} $name1; rsem-calculate-expression --bam --paired-end $name1.bam $reference_file $name2\"".format(convert_command, outputFilenames[i], )
+
         try:
             os.system(command_string)
         except OSError:
             sys.exit("Command failed: " + command_string)
         print "Job {0}/{1} submitted for dir {2}".format(i+1,len(inputFilenames_1),idir)
         
+
+
+
+
+
+
 

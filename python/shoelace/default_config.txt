@@ -24,8 +24,8 @@ bowtie                    = 'bowtie'
 # Path to fastq_dump executable from SRAtools
 fastq_dump                = 'fastq-dump'
 
-# Path to rsem executable
-rsem_calculate_expression = 'rsem-calculate-expression'
+# Path to rsem directory
+rsem_dir                  = '/path/to/rsem/'
 
 # Path to RSEM reference (created with rsem utilities)
 RefGenomeDir              = 'references/ucsc/hg19/rsem'
