@@ -184,7 +184,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("--loadfile", help="Load a previous output *.npz file")
     parser.add_argument("--filelist", help="Load previous output *.npz files from list passed on command line", nargs='+')
-    args = parser.parse_args()
+    args = parser.parse_known_args()
 
     if args.loadfile:
         if os.path.isfile(args.loadfile):
@@ -203,7 +203,8 @@ if __name__ == "__main__":
     if args.filelist:
         p = Plotter()
         p.saveAsPDF = True
-        p.generateClusterPlots(args.filelist)
+        timelabel = time.strftime("%m_%d_%Y_-_%H_%M_%S")
+        p.generateClusterPlots(args.filelist, timelabel)
 
     else:
         print("If calling this file directly, you must specify the \"--loadfile\" <path> or \"--filelist\" <files> argument with a path to the *.npz file containing the processed data.")

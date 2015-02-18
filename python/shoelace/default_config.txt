@@ -8,10 +8,10 @@ GEO_SeriesMatrixURL       = 'Series_matrix.txt.gz'
 # Directory to save experiment series information matrix, and other metadata
 SeriesMetadataDir         = "."
 
-# Directory to save FASTQ files retrieved
+# Directory to save FASTQ files retrieved (this folder should be named 'fastq')
 fastq_dir                 = "./fastq"
 
-# Directory to save FASTQ files created by shuffling
+# Directory to save FASTQ files created by shuffling (this folder should be named 'fastq_virtual')
 virtual_fastq_dir         = "./fastq_virtual"
 
 # ------------------------------------------------------------------------------------------
