@@ -7,5 +7,5 @@ setup(name='shoelace',
       author='Marcello DiStasio',
       license='GNU GPL',
       packages=['shoelace'],
-      dependency_links=["git+https://github.com/wmayner/pyemd@develop#egg=pyemd"]
+      dependency_links=["git+https://github.com/wmayner/pyemd@develop#egg=pyemd"],
       zip_safe=False)
