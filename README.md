@@ -16,6 +16,7 @@ A python package for RNA sequence data and expression level analysis and utiliti
 Clone the repository and run setup.py:
 
     git clone https://github.com/ChellyD65/shoelace.git <installdir>
+    cd <installdir>/python
     [sudo] python setup.py install
 
 This will install the package and its dependencies. If you don't want to install the package system-wide, then in your python script or code, add the path to the 'python/shoelace' directory
