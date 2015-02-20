@@ -8,6 +8,6 @@ setup(name='shoelace',
       license='GNU GPL',
       packages=['shoelace'],
       setup_requires=["numpy"],
-      install_requires=["numpy", "pyemd", "Bio", "matplotlib", "sklearn", "scipy"],
-      dependency_links=["git+https://github.com/wmayner/pyemd@develop#egg=pyemd", "git+https://github.com/biopython/biopython"],
+      install_requires=["numpy", "pyemd", "biopython", "matplotlib", "scikit-learn", "scipy"],
+      dependency_links=["https://github.com/wmayner/pyemd", "https://github.com/biopython/biopython"],
       zip_safe=False)
