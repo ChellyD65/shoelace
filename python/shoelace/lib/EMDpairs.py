@@ -16,7 +16,7 @@ import csv
 import re
 """
 import pyemd
-from shoelace.lib import Utilities
+import shoelace.lib.Utilities
 
 class EMDpairs:
 
@@ -44,6 +44,7 @@ class EMDpairs:
                 tsel_r_norm = (tsel_r - np.mean(tsel_r, axis=0))/np.std(tsel_r, axis=0)
                 tsel_v_norm = (tsel_v - np.mean(tsel_v, axis=0))/np.std(tsel_v, axis=0)
                 self.data.append(tsel_r_norm - tsel_v_norm)
+                print("done")
             else:
                 if plot_virtual:
                     self.data.append(d['tsel_v'])
@@ -68,7 +69,7 @@ if __name__ == "__main__":
         e = EMDpairs()
         t = time.strftime("%m_%d_%Y_-_%H_%M_%S")
         e.setup(args.filelist, t, bool(int(args.normalize)), bool(int(args.virtual)))
-        print e.run()
+        print(e.run())
         
     else:
         print("If calling this file directly, you must specify the \"--loadfile\" <path> or \"--filelist\" <files> argument with a path to the *.npz file containing the processed data.")
