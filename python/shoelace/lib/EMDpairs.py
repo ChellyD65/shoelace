@@ -7,11 +7,11 @@ Created on Wed Jan 21 13:32:31 2014
 
 from __future__ import print_function
 """
-import sys, os
 import glob
 import csv
 import re
 """
+import sys, os
 import numpy as np
 import time 
 import argparse
@@ -19,23 +19,25 @@ from pyemd import emd
 from sklearn.metrics import euclidean_distances
 import Utilities
 
+from matplotlib import rc
+rc('text', usetex=True)
+rc('font',**{'family':'serif','serif':['Palatino']})
+import matplotlib as mpl
+mpl.use('Agg') # Don't use Xserver
+import matplotlib.pyplot as plt
+from matplotlib import cm
+from matplotlib.backends.backend_pdf import PdfPages
+
+
 class EMDpairs:
 
     def __init__(self):
         self.n = 0
         self.u = Utilities.Utilities()
+        self.saveAsPDF = True
 
     def setup(self,filenames, normalizeByShuffled, virtualOnly):
         
-        """
-        if self.saveAsPDF:
-            pdffn = os.path.join(os.getcwd(), os.path.splitext(os.path.basename(__file__))[0] + "_run_" + timelabel + ".results.pdf")
-            pp = PdfPages(pdffn)
-            print("Saving plots to PDF: " + pdffn)
-
-        mpl.rcParams['figure.figsize'] = (40.0, 60.0)
-        fig, axes22 = plt.subplots(5, 3)
-        """
 
         self.data = []
         for f in range(len(filenames)):
@@ -53,15 +55,50 @@ class EMDpairs:
             print(self.data[-1].shape)
 
     def run(self):
+
+
+        if self.saveAsPDF:
+            timelabel = time.strftime("%m_%d_%Y_-_%H_%M_%S")
+            pdffn = os.path.join(os.getcwd(), os.path.splitext(os.path.basename(__file__))[0] + "_run_" + timelabel + ".results.pdf")
+            pp = PdfPages(pdffn)
+            print("Saving plots to PDF: " + pdffn)
+
+        mpl.rcParams['figure.figsize'] = (40.0, 60.0)
+        fig, axes = plt.subplots(len(self.data))
+
+        f = 0
         for tumor_set in self.data:
-            self.emd_allrows(tumor_set)
+            histog = np.apply_along_axis(lambda x: np.histogram(x,256)[0], 1, tumor_set)
+            em = self.emd_allrows(histog)
+
+            """
+            Next, should sort rows of em by their sums, to look nice
+            """
+
+
+            cax = axes[f].imshow(em,aspect='equal');
+            cbar = plt.colorbar(cax, ticks=np.round(np.arange(np.min(em),np.max(em),100)*2)/2)
+            cbar.ax.set_yticklabels(map(str, np.round(np.arange(np.min(em),np.max(em),100)*2)/2))# vertically oriented colorbar
+            cbar.set_label('EMD over gene expression distribution')
+
+            f=f+1
+
+        if self.saveAsPDF:
+            pp.savefig()
+        pp.close()
         return 0
 
+    
+
     def emd_allrows(self,M):
-        d = euclidean_distances(M.T)
+        M = M.astype('float')
+        EMDout = np.empty([M.shape[0],M.shape[0]])
+        d = np.ones([M.shape[1],M.shape[1]])
+        rr = 0
         for r in M:
             a = np.apply_along_axis(emd, 1, M, r, d)
-            print(a)
+            EMDout[rr,:] = a.T; rr=rr+1
+        return EMDout
         
 
         
@@ -77,7 +114,7 @@ if __name__ == "__main__":
 
     if args.filelist:
         e = EMDpairs()
-        t = time.strftime("%m_%d_%Y_-_%H_%M_%S")
+#        t = time.strftime("%m_%d_%Y_-_%H_%M_%S")
         e.setup(args.filelist, bool(int(args.normalize)), bool(int(args.virtual)))
         print(e.run())
 
