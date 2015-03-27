@@ -4,7 +4,7 @@ A python package for RNA sequence data and expression level analysis and utiliti
 
 ### Requirements
 -------------------
-* Tested with Python 2.7.1
+* Tested with Python 2.6.6
 * <a href="http://biopython.org/wiki/Main_Page">Biopython</a>, <a href="http://www.numpy.org/">NumPy</a>, <a href="http://www.scipy.org/">SciPy</a>, <a href="http://matplotlib.org/">matplotlib</a>, <a href="http://scikit-learn.org/">scikit-learn</a>
 * <a href="https://github.com/ncbi/sra-tools/wiki/Downloads">sratools</a>
 * <a href="http://bowtie-bio.sourceforge.net/index.shtml">bowtie</a>
