@@ -33,8 +33,8 @@ class Shuffler:
         self.ReadFileLens()
         
     def run(self):
-        print "%d line counts found in file." % len(self.linecounts)
-        print "%d input files found." % len(self.inputFilenames)
+        print("{} line counts found in file.".format(len(self.linecounts)))
+        print("{} input files found.".format(len(self.inputFilenames)))
         self.OpenOutputFiles(len(self.linecounts))
         c = 0
         for f in self.inputFilenames:
@@ -64,7 +64,7 @@ class Shuffler:
                         if not self.singleEnd:
                             self.outfileHandles_2[fn].write(read2[i])
             c = c + 1
-            print "Done reading file %s. [%d/%d]"  % f, c, len(self.inputFilenames)
+            print("Done reading file {}. [{}/{}]".format(f, c, len(self.inputFilenames)))
         self.CloseOutputFiles()
         
     def file_len(self, fname):
@@ -81,13 +81,13 @@ class Shuffler:
         if fname == 0:
             fname = os.path.join(self.p.fastq_dir, "FASTQ_linecounts.txt")
         if not os.path.exists(fname):
-            print "Counting lines in FASTQ files, using system call to wc -l"
+            print("Counting lines in FASTQ files, using system call to wc -l")
             try:
                 os.system("wc -l " + os.path.join(self.p.fastq_dir,"*.fastq") + " > " + fname)
             except OSError:
-                print "Counting lines in fastq files with wc failed."
+                print("Counting lines in fastq files with wc failed.")
                 return -1
-        print "Reading line counts for FASTQ files from " + fname
+        print("Reading line counts for FASTQ files from " + fname)
         if self.singleEnd:
             self.linecounts = np.genfromtxt(fname, delimiter=" ")[:-1:1,0]
         else:
@@ -117,11 +117,11 @@ class Shuffler:
                 i.close()
     
     def CreateVirtualCellsFromAllReadsMerged(self, n=430, pairedEndFiles=True):
-        print "Writing virtual cells."
+        print("Writing virtual cells.")
         INFILE1 = os.path.join(self.virtual_fastq_dir, "AllReads_Merged_1.fastq")
         if pairedEndFiles:
             INFILE2 = os.path.join(self.virtual_fastq_dir, "AllReads_Merged_2.fastq")
-        print "Total number of reads: " + str(TotalReads)
+        print("Total number of reads: " + str(TotalReads))
         return 0
 
 

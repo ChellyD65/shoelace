@@ -75,13 +75,13 @@ class FileLoader:
 
         # mmdhere: need to update
         #If the list already exists, just load it
-        SRR_list_file = os.path.join(self.p.SeriesMetadataDir, 'GSE57872_AccessionNumbersForCellsOfInterest.txt')
-        if os.path.exists(SRR_list_file):
-            print "SRR Accession numbers for cells of interest found (" + os.path.split(SRR_list_file)[1] + ") -- loading..."
-            with open(SRR_list_file) as f:
-                content = f.readlines()
-            aSRR = [a.split(':')[2].strip(' \n') for a in content]
-            return aSRR
+        # SRR_list_file = os.path.join(self.p.SeriesMetadataDir, 'GSE57872_AccessionNumbersForCellsOfInterest.txt')
+        # if os.path.exists(SRR_list_file):
+        #     print "SRR Accession numbers for cells of interest found (" + os.path.split(SRR_list_file)[1] + ") -- loading..."
+        #     with open(SRR_list_file) as f:
+        #         content = f.readlines()
+        #     aSRR = [a.split(':')[2].strip(' \n') for a in content]
+        #     return aSRR
 
 
         hits = []
@@ -91,15 +91,13 @@ class FileLoader:
                 #regex=re.compile(pattern)
                 #inds = [i for i,x in enumerate(records) if regex.search(x)]
                 inds = [i for i,x in enumerate(records) if (x==pattern)]
-                hits.append(inds)
+                hits.extend(inds)
                 #finalinds.extend(inds)
         if len(hits) > 0:
-            finalinds = list(set.intersection(*map(set, hits)))
+            finalinds = set(hits)
         else:
             records = SM[SM.keys()[0]]
             finalinds = [i for i,x in enumerate(records)]
-
-
 
         for ke in exclude.keys():
             records=SM[ke]
@@ -163,10 +161,10 @@ class FileLoader:
         FASTQ_file_single = os.path.join(d,a+".fastq")
         FASTQ_file_1 = os.path.join(d,a+"_1.fastq")
         FASTQ_file_2 = os.path.join(d,a+"_2.fastq")
-        if (os.path.exists(FASTQ_file_1) & os.path.exists(FASTQ_file_2)) or (os.path.exists(FASTQ_file_1+".gz") & os.path.exists(FASTQ_file_2+".gz")):
+        if (os.path.isfile(FASTQ_file_1) & os.path.isfile(FASTQ_file_2)) or (os.path.isfile(FASTQ_file_1+".gz") & os.path.isfile(FASTQ_file_2+".gz")):
             print "Paired-end read fastq files found: " + FASTQ_file_1 + " , " + os.path.split(FASTQ_file_2)[1]
             return 0
-        if (os.path.exists(FASTQ_file_single) or os.path.exists(FASTQ_file_single+".gz")):
+        if (os.path.isfile(FASTQ_file_single) or os.path.isfile(FASTQ_file_single+".gz")):
             print "Single-end read fastq file found: " + FASTQ_file_single
             return 0
          
@@ -183,10 +181,10 @@ class FileLoader:
                 except subprocess.CalledProcessError:
                     print "fastq-dump returned an error: " + str(subprocess.CalledProcessError.returncode)
 
-        if (os.path.exists(FASTQ_file_1) & os.path.exists(FASTQ_file_2)) or (os.path.exists(FASTQ_file_1+".gz") & os.path.exists(FASTQ_file_2+".gz")):
+        if (os.path.isfile(FASTQ_file_1) & os.path.isfile(FASTQ_file_2)) or (os.path.isfile(FASTQ_file_1+".gz") & os.path.isfile(FASTQ_file_2+".gz")):
             print "Paired-end read fastq files found: " + FASTQ_file_1 + " , " + os.path.split(FASTQ_file_2)[1]
             return 0
-        if (os.path.exists(FASTQ_file_single) or os.path.exists(FASTQ_file_single+".gz")):
+        if (os.path.isfile(FASTQ_file_single) or os.path.isfile(FASTQ_file_single+".gz")):
             print "Single-end read fastq file found: " + FASTQ_file_single
             return 0
 
@@ -253,9 +251,6 @@ class FileLoader:
             choice = dict((k, v) for k, v in choice.iteritems() if len(v)>0)
             exclude = dict((k, v) for k, v in exclude.iteritems() if len(v)>0)
 
-
-
-            
             for k in set(choice.keys()) & set(exclude.keys()):
                 if choice[k] == exclude[k]:
                     print "\nERROR: Same value present in both choice and exclude:"

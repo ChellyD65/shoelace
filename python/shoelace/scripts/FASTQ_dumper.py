@@ -1,4 +1,4 @@
-#!/opt/python-2.7.1/bin/python
+#!/usr/bin/env python
 """
 Created on Thurs, 9/04/2014
 @author: mdistasio
@@ -43,6 +43,8 @@ if args.configfile:
 else:
     p = mmdConfig.Paths()
 SeriesMetadataDir = p.SeriesMetadataDir 
+if not os.path.isdir(SeriesMetadataDir):
+    os.makedirs(SeriesMetadataDir)
 
 """
 Load the series matrix 
@@ -50,6 +52,8 @@ This gives the GEO accession numbers for all samples, and their descriptions
 """
 SM_file = os.path.join(SeriesMetadataDir,os.path.split(p.GEO_SeriesMatrixURL)[1])
 if not(os.path.exists(SM_file)):
+    if not os.path.exists(SeriesMetadataDir):
+        os.makedirs(SeriesMetadataDir)
     G =  GZFS.GetGZippedFromServer()
     G.getunzipped(p.GEO_SeriesMatrixURL, SM_file)
 else:
